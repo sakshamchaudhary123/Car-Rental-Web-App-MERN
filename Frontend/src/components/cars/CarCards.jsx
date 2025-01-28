@@ -3,6 +3,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CarCard = ({ car }) => {
+  if (!car) {
+    return <div>Loading...</div>; // Handle loading state or error
+  }
+
   const {
     id,
     name,
@@ -15,7 +19,7 @@ const CarCard = ({ car }) => {
   } = car;
 
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl transition-shadow">
+    <div className="card bg-base-100 shadow-xl hover:shadow-2xl hover:scale-90 duration-300 transition-transform cursor-pointer">
       <figure className="px-4 pt-4">
         <img 
           src={image} 

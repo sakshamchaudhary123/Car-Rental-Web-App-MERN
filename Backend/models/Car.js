@@ -22,10 +22,15 @@ const CarSchema = new mongoose.Schema({
     default: true
   },
   imageUrl: {
-    type: String,
-    required: true
+    public_id: {
+      type: String,
+      required: true
+    },
+    secure_url: {
+      type: String,
+      required: true
+    }
   },
-  features: [String]
 });
 
-export default mongoose.model('Car', CarSchema);
+export const Car =  mongoose.model('Car', CarSchema);
