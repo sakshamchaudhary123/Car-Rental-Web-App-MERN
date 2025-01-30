@@ -1,0 +1,134 @@
+[
+    {
+      "id": 1,
+      "name": "Toyota Corolla",
+      "image": "/assets/images/1.jpg",
+      "pricePerDay": 500,
+      "type": "Sedan",
+      "transmission": "Automatic",
+      "seats": 5,
+      "fuelType": "Petrol",
+      "category": "Trending"
+    },
+    {
+      "id": 2,
+      "name": "Honda Civic",
+      "image": "Car2",
+      "pricePerDay": 600,
+      "type": "Sedan",
+      "transmission": "Manual",
+      "seats": 5,
+      "fuelType": "Diesel",
+      "category": "New Arrival"
+    },
+    {
+      "id": 3,
+      "name": "Toyota Prius",
+      "image": "Car1",
+      "pricePerDay": 700,
+      "type": "Hatchback",
+      "transmission": "Automatic",
+      "seats": 5,
+      "fuelType": "Petrol",
+      "category": "Trending"
+    },
+    {
+      "id": 4,
+      "name": "Suzuki Swift",
+      "image": "Car2",
+      "pricePerDay": 400,
+      "type": "Hatchback",
+      "transmission": "Manual",
+      "seats": 5,
+      "fuelType": "Petrol",
+      "category": "Economy"
+    },
+    {
+      "id": 5,
+      "name": "Toyota Land Cruiser",
+      "image": "Car1",
+      "pricePerDay": 1000,
+      "type": "SUV",
+      "transmission": "Automatic",
+      "seats": 8,
+      "fuelType": "Diesel",
+      "category": "Luxury"
+    },
+    {
+      "id": 6,
+      "name": "Toyota Fortuner",
+      "image": "Car2",
+      "pricePerDay": 900,
+      "type": "SUV",
+      "transmission": "Automatic",
+      "seats": 7,
+      "fuelType": "Diesel",
+      "category": "Luxury"
+    },
+    {
+      "id": 7,
+      "name": "Ford Mustang",
+      "image": "Car3",
+      "pricePerDay": 1500,
+      "type": "Coupe",
+      "transmission": "Automatic",
+      "seats": 4,
+      "fuelType": "Petrol",
+      "category": "Trending"
+    },
+    {
+      "id": 8,
+      "name": "BMW X5",
+      "image": "Car4",
+      "pricePerDay": 1200,
+      "type": "SUV",
+      "transmission": "Automatic",
+      "seats": 5,
+      "fuelType": "Diesel",
+      "category": "Luxury"
+    },
+    {
+      "id": 9,
+      "name": "Hyundai Elantra",
+      "image": "Car5",
+      "pricePerDay": 550,
+      "type": "Sedan",
+      "transmission": "Manual",
+      "seats": 5,
+      "fuelType": "Petrol",
+      "category": "New Arrival"
+    },
+    {
+      "id": 10,
+      "name": "Audi A6",
+      "image": "Car6",
+      "pricePerDay": 1300,
+      "type": "Sedan",
+      "transmission": "Automatic",
+      "seats": 5,
+      "fuelType": "Diesel",
+      "category": "Luxury"
+    },
+    {
+      "id": 11,
+      "name": "Toyota Camry",
+      "image": "Car7",
+      "pricePerDay": 650,
+      "type": "Sedan",
+      "transmission": "Automatic",
+      "seats": 5,
+      "fuelType": "Petrol",
+      "category": "Trending"
+    },
+    {
+      "id": 12,
+      "name": "Honda City",
+      "image": "Car8",
+      "pricePerDay": 450,
+      "type": "Sedan",
+      "transmission": "Manual",
+      "seats": 5,
+      "fuelType": "Petrol",
+      "category": "Economy"
+    }
+]

@@ -2,8 +2,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CarCard = ({ car }) => {
-  if (!car) {
+const CarCard = ({ item }) => {
+  if (!item) {
     return <div>Loading...</div>; // Handle loading state or error
   }
 
@@ -16,10 +16,10 @@ const CarCard = ({ car }) => {
     transmission,
     seats,
     fuelType
-  } = car;
+  } = item;
 
   return (
-    <div className="card bg-base-100 shadow-xl hover:shadow-2xl hover:scale-90 duration-300 transition-transform cursor-pointer">
+    <div className="card bg-slate-100 shadow-2xl hover:scale-105 duration-150 mx-2 my-4 transition-transform cursor-pointer">
       <figure className="px-4 pt-4">
         <img 
           src={image} 
@@ -41,7 +41,7 @@ const CarCard = ({ car }) => {
 
         <div className="flex justify-between items-center mt-4">
           <div className="text-xl font-bold">
-            ${pricePerDay}
+            Rs {pricePerDay}
             <span className="text-sm font-normal">/day</span>
           </div>
           <Link to={`/cars/${id}`} className="btn btn-primary btn-sm">

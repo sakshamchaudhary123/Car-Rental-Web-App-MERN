@@ -1,9 +1,10 @@
 import React from 'react'
+import AddCarForm from '../components/Admin/AddCarForm'
 
 function AdminDashboard() {
   return (
     <div>
-      AdminDashboard
+      <AddCarForm />
     </div>
   )
 }

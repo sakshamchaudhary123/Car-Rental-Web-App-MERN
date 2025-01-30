@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Banner() {
   return (
-    <div>
+    <div >
       <div
         className="hero h-[70vh]" // Custom height of 75% of the viewport height
         style={{

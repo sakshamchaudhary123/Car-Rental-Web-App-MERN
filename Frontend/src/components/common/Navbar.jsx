@@ -1,6 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
+
+  const [sticky, setSticky] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setSticky(true);
+      } else {
+        setSticky(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
@@ -19,7 +35,7 @@ function Navbar() {
   );
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
+    <div className={`w-full top-0 left-0 right-0 fixed ${sticky ? "sticky-navbar bg-base-100 duration-300 transition-all ease-in-out shadow-md" : ""}`}>
       <div className="navbar bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
@@ -88,9 +104,9 @@ function Navbar() {
               </label>
           </div>
           <div>
-          <a className="px-5 py-2 rounded-md cursor-pointer hover:bg-slate-800 duration-300 bg-blue-500 text-white  text-2xl">
+          <Link to={"/login"} className="px-5 py-2 rounded-md cursor-pointer hover:bg-slate-800 duration-300 bg-blue-500 text-white  text-2xl">
             Login
-          </a>
+          </Link>
           </div>
         </div>
       </div>

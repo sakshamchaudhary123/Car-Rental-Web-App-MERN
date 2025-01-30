@@ -4,7 +4,7 @@ function Features() {
   return (
     <div>
       {/* Features Section */}
-      <div className="bg-base-200 py-12">
+      <div className="bg-base-300 py-12">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-8">Why Choose Us</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -1,127 +1,126 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { set, useForm } from "react-hook-form";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-import axios from "axios";
-import toast from "react-hot-toast";
+const Login = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-import { useAuth } from "../context/AuthProvider";
-
-function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-
-  const { login } = useAuth(); // Destructure login from Auth Context
-
-  const onSubmit = async (data) => {
-    const userInfo = {
-      email: data.email,
-      password: data.password,
-    };
-
-    await axios
-      .post("http://localhost:4001/user/login", userInfo)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data) {
-          toast.success("Login successful");
-          closeModal();
-          setTimeout(() => {
-            window.location.reload(); // reload the page
-          }, 1000);
-        }
-        localStorage.setItem("Users", JSON.stringify(res.data.user)); // only for user data not message
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err.response.data);
-          toast.error("Error: " + err.response.data.message);
-          setTimeout(() => {}, 2000);
-        }
-      });
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const response = await axios.post('/api/auth/login', formData);
+      
+      // Store token in localStorage
+      localStorage.setItem('token', response.data.token);
+      
+      // Redirect to home page
+      navigate('/');
+    } catch (err) {
+      setError(err.response?.data?.message || 'Invalid credentials');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Function to close the login modal by navigating to the home page
   const closeModal = () => {
-    const modal = document.getElementById("my_modal_3");
-    if (modal) modal.close();
+    setLoading(true);  // Optional: Show loading indicator to indicate navigation
+    setTimeout(() => {
+      navigate('/'); // Navigate to home page after a small delay (to avoid flickering)
+    }, 200);  // Adjust delay as necessary (200ms in this case)
   };
+  
 
   return (
-    <div>
-      <dialog id="my_modal_3" className="modal">
-        <div className="modal-box dark:text-black">
-          <form onSubmit={handleSubmit(onSubmit)} method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button
-              id="close_modal_3"
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              onClick={closeModal}
-            >
-              ✕
-            </button>
-            <h3 className="font-bold text-lg mb-4 ">Login</h3>
-            {/* Email */}
-            <div className="space-y-2 ">
-              <label htmlFor="email">Email</label> <br />
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Enter your Email"
-                className="md:w-80 border outline-none rounded-md px-2 py-1 "
-                {...register("email", { required: true })}
-              />
-              <br />
-              {errors.email && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
+    <>
+      <div className="min-h-screen bg-base-200 py-8" id="login_modal">
+        <div className="max-w-md mx-auto bg-base-100 rounded-lg shadow-xl relative">
+          <div className="card">
+            <div className="card-body">
+              <h2 className="card-title text-2xl font-bold text-center mb-6">Welcome Back</h2>
+
+              {error && (
+                <div className="alert alert-error mb-4">
+                  <span>{error}</span>
+                </div>
               )}
-            </div>
-            {/* Password */}
-            <div className="space-y-2 mt-2">
-              <label htmlFor="password">Password</label> <br />
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="Enter your Password"
-                className="md:w-80 border outline-none rounded-md px-2 py-1 "
-                {...register("password", { required: true })}
-              />
-              <br />
-              {errors.password && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
-            </div>
-            {/* Button */}
-            <div className="flex space-x-4 md:justify-around my-6">
-              <button
-                type="submit"
-                className="px-2 py-1 bg-pink-600 text-white hover:bg-pink-700 rounded-md cursor-pointer"
-              >
-                Login
-              </button>
-              <div>
-                <span>Not have an account? </span>
-                <Link
-                  to="/signup"
-                  className="underline text-blue-500 cursor-pointer"
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Email</span>
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="input input-bordered"
+                    required
+                  />
+                </div>
+
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                    <Link to="/forgot-password" className="label-text-alt link link-primary">
+                      Forgot password?
+                    </Link>
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    className="input input-bordered"
+                    required
+                  />
+                </div>
+
+                <button 
+                  type="submit" 
+                  className={`btn btn-primary w-full ${loading ? 'loading' : ''}`}
+                  disabled={loading}
                 >
-                  Signup
+                  {loading ? 'Logging in...' : 'Login'}
+                </button>
+              </form>
+
+              <div className="text-center mt-4">
+                Don't have an account?{' '}
+                <Link to="/register" className="link link-primary">
+                  Register here
                 </Link>
               </div>
+
+              {/* Close button to navigate back to the home page */}
+              <div className="text-center mt-4">
+                <button
+                  onClick={closeModal}
+                  className="btn bg-blue-500 hover:bg-blue-400 text-white w-full"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-          </form>
+          </div>
         </div>
-      </dialog>
-    </div>
+      </div>
+    </>
   );
-}
+};
 
 export default Login;
